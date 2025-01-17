@@ -11,11 +11,19 @@ dotEnv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
+const testRoutes = require('./routes/userRoutes'); // Chemin vers votre fichier de routes
+app.use('/api', testRoutes);
+
+
 // Connect to the database
 dbConnection()
 
 // Handle CORS issues
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173', // Remplacez par l'URL de votre frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Autorisez les méthodes nécessaires
+  credentials: true, // Si vous utilisez des cookies ou des sessions
+}));
 
 // Request payload middleware
 app.use(express.json())
