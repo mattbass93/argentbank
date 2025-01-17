@@ -19,11 +19,7 @@ app.use('/api', testRoutes);
 dbConnection()
 
 // Handle CORS issues
-app.use(cors({
-  origin: 'http://localhost:5173', // Remplacez par l'URL de votre frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Autorisez les méthodes nécessaires
-  credentials: true, // Si vous utilisez des cookies ou des sessions
-}));
+app.use(cors())
 
 // Request payload middleware
 app.use(express.json())

@@ -1,6 +1,10 @@
 
 // import '../assets/css/main.css'; // Import du CSS
-import argentBankLogo from "../assets/img/argentBankLogo.png" // Assurez-vous que l'image est accessible
+import argentBankLogo from "../assets/img/argentBankLogo.png"
+import chatIcon from "../assets/img/icon-chat.png"
+import moneyIcon from "../assets/img/icon-money.png"
+import securityIcon from "../assets/img/icon-security.png"
+
 
 const Home = () => {
   return (
@@ -41,7 +45,7 @@ const Home = () => {
           <h2 className="sr-only">Features</h2>
           <div className="feature-item">
             <img
-              src="/assets/img/icon-chat.png"
+              src={chatIcon}
               alt="Chat Icon"
               className="feature-icon"
             />
@@ -53,7 +57,7 @@ const Home = () => {
           </div>
           <div className="feature-item">
             <img
-              src="/assets/img/icon-money.png"
+              src={moneyIcon}
               alt="Money Icon"
               className="feature-icon"
             />
@@ -64,7 +68,7 @@ const Home = () => {
           </div>
           <div className="feature-item">
             <img
-              src="/assets/img/icon-security.png"
+              src={securityIcon}
               alt="Security Icon"
               className="feature-icon"
             />

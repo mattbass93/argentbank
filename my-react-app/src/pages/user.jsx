@@ -1,4 +1,8 @@
 
+import argentBankLogo from "../assets/img/argentBankLogo.png"
+
+
+
 const User = () => {
   const user = {
     firstName: 'Tony',
@@ -32,7 +36,7 @@ const User = () => {
         <a className="main-nav-logo" href="/">
           <img
             className="main-nav-logo-image"
-            src="/assets/img/argentBankLogo.png"
+            src={argentBankLogo}
             alt="Argent Bank Logo"
           />
           <h1 className="sr-only">Argent Bank</h1>
