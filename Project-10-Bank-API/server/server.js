@@ -10,6 +10,12 @@ dotEnv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3001
+// Handle CORS issues
+app.use(cors())
+
+// Request payload middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 const testRoutes = require('./routes/userRoutes'); // Chemin vers votre fichier de routes
 app.use('/api', testRoutes);
@@ -18,12 +24,10 @@ app.use('/api', testRoutes);
 // Connect to the database
 dbConnection()
 
-// Handle CORS issues
-app.use(cors())
+console.log('toto2')
 
-// Request payload middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+
+
 
 // Handle custom routes
 app.use('/api/v1/user', require('./routes/userRoutes'))
