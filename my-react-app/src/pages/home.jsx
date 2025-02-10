@@ -20,8 +20,8 @@ const Home = () => {
           <h1 className="sr-only">Argent Bank</h1>
         </a>
         <div>
-          <a className="main-nav-item" href="/login">
-            <i className="fa fa-user-circle"></i>
+          <a className="main-nav-item sign-in" href="/login">
+            <i className="fa fa-user-circle sign-in-logo"></i>
             Sign In
           </a>
         </div>

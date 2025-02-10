@@ -11,7 +11,7 @@ router.post('/signup', userController.createUser)
 
 router.post('/login', userController.loginUser)
 
-router.post(
+router.get(
   '/profile',
   tokenValidation.validateToken,
   userController.getUserProfile

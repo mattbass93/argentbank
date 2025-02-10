@@ -1,48 +1,39 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  setEmail,
+  setPassword,
+  setRememberMe,
+  setError,
+} from "../utils/sliceuser";
+import apiFetch from "../utils/api";
 import argentBankLogo from "../assets/img/argentBankLogo.png";
-import API_BASE_URL from '../config/apiconfiguration';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Permet la redirection
+  const email = useSelector((state) => state.user.email);
+  const password = useSelector((state) => state.user.password);
+  const rememberMe = useSelector((state) => state.user.rememberMe);
+  const error = useSelector((state) => state.user.error);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+      const data = await apiFetch("/login", "POST", { email, password });
   
-  try {
-    console.log("Tentative de connexion à :", API_BASE_URL); // Debug URL
-    const response = await fetch(API_BASE_URL + '/login', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ "email": email, "password": password }),
-    });
-
-    console.log("Réponse brute :", response); // Vérifie si la réponse est bien reçue
-
-    const data = await response.json();
-    console.log("Données reçues :", data); // Affiche le token récupéré
-
-    if (!response.ok) {
-      throw new Error(data.message || "Échec de la connexion");
+      console.log("✅ Token reçu après connexion :", data.body.token);
+  
+      localStorage.setItem("authToken", data.body.token);
+  
+      navigate("/user");
+    } catch (err) {
+      console.error("❌ Erreur lors de la connexion :", err);
+      dispatch(setError(err.message));
     }
-
-    localStorage.setItem("authToken", data.body.token);
-
-    navigate("/user");
-  } catch (err) {
-    console.error("Erreur lors de la connexion :", err);
-    setError(err.message);
-  }
-};
-
+  };
   
-
   return (
     <>
       {/* Navigation */}
@@ -52,8 +43,8 @@ const handleSubmit = async (e) => {
           <h1 className="sr-only">Argent Bank</h1>
         </a>
         <div>
-          <a className="main-nav-item" href="/login">
-            <i className="fa fa-user-circle"></i>
+          <a className="main-nav-item sign-in" href="/login">
+            <i className="fa fa-user-circle sign-in-logo"></i>
             Sign In
           </a>
         </div>
@@ -71,7 +62,7 @@ const handleSubmit = async (e) => {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => dispatch(setEmail(e.target.value))}
                 required
               />
             </div>
@@ -81,7 +72,7 @@ const handleSubmit = async (e) => {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => dispatch(setPassword(e.target.value))}
                 required
               />
             </div>
@@ -90,7 +81,7 @@ const handleSubmit = async (e) => {
                 type="checkbox"
                 id="remember-me"
                 checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
+                onChange={(e) => dispatch(setRememberMe(e.target.checked))}
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
@@ -98,7 +89,7 @@ const handleSubmit = async (e) => {
               Sign In
             </button>
           </form>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </section>
       </main>
 

@@ -14,11 +14,8 @@ body {
 }
 
 .main {
-  flex: 1;
-}
-
-.bg-dark {
-  background-color: #12002b;
+  background-color: #c5cce1;
+  padding-bottom: 30px;
 }
 
 .sr-only {
@@ -39,13 +36,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
 }
 
 .main-nav a {
   font-weight: bold;
   color: #2c3e50;
+  cursor: pointer;
 }
+
+
 
 .main-nav a.router-link-exact-active {
   color: #42b983;
@@ -53,11 +52,12 @@ body {
 
 .main-nav-item {
   text-decoration: none;
+  font-size: 1rem;
   margin-right: 0.5rem;
 }
 
-.main-nav-item:hover {
-  text-decoration: underline;
+.main-nav-firstname {
+  margin-right: 15px;
 }
 
 .main-nav-logo {
@@ -124,8 +124,22 @@ body {
 h1 {
   padding-top: 20px;
   margin-bottom: 15px;
+  margin-top: 0;
+  color: black;
 }
 
+.main-nav-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4;
+}
+
+@media (min-width: 920px) {
+  .main-nav {
+    padding : 10px;
+  }
+}
 
 
 @media (min-width: 920px) {
@@ -202,8 +216,15 @@ h1 {
   background-color: white;
   width: 80%;
   margin: 0 auto;
-  margin-top: 3rem;
   padding: 2rem;
+}
+
+.sign-in {
+  font-size: 1.2rem;
+}
+
+.sign-in-logo {
+  margin-right: 10px;;
 }
 
 .sign-in-icon {
@@ -284,11 +305,12 @@ h1 {
 }
 
 .edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+  border-color: #5f33fba1;
+  background-color: #fff;
+  color: #5f33fba1;
   font-weight: bold;
   padding: 10px;
+  cursor: pointer;
 }
 
 .header {
@@ -303,8 +325,9 @@ h1 {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: #5f33fb;
+  background-color: #5f33fb;
+  border-radius: 5px;
   color: #fff;
 }
 

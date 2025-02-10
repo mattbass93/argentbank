@@ -17,14 +17,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const testRoutes = require('./routes/userRoutes'); // Chemin vers votre fichier de routes
+const testRoutes = require('./routes/userRoutes');
 app.use('/api', testRoutes);
 
 
 // Connect to the database
 dbConnection()
-
-console.log('toto2')
 
 
 
