@@ -27,10 +27,7 @@ const User = () => {
       }
   
       try {
-        console.log("🔎 Tentative de récupération du profil...");
         const data = await apiFetch("/profile", "GET", null, true);
-  
-        console.log("✅ Données utilisateur reçues :", data.body);
         dispatch(setUser(data.body));
       } catch (err) {
         console.error("❌ Erreur lors de la récupération du profil :", err);

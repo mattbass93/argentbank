@@ -23,8 +23,6 @@ const Login = () => {
     try {
       const data = await apiFetch("/login", "POST", { email, password });
   
-      console.log("✅ Token reçu après connexion :", data.body.token);
-  
       localStorage.setItem("authToken", data.body.token);
   
       navigate("/user");
