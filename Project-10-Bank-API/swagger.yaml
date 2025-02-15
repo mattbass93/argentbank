@@ -229,6 +229,87 @@ paths:
         500:
           description: Internal Server Error
 
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Add extra information to a transaction
+      description: Attach additional details, notes, or tags to an existing transaction.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: transactionId
+          in: path
+          description: ID of the transaction to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Extra information for the transaction
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionExtraInfo'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Extra information added successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        400:
+          description: Bad request (Invalid data)
+        401:
+          description: Unauthorized (Token missing or invalid)
+        404:
+          description: Transaction not found
+        500:
+          description: Internal Server Error
+
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update transaction details
+      description: Modify specific transaction details or add additional information.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: transactionId
+          in: path
+          description: ID of the transaction to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: New transaction data (including additional information)
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        400:
+          description: Bad request (Invalid data)
+        401:
+          description: Unauthorized (Token missing or invalid)
+        404:
+          description: Transaction not found
+        500:
+          description: Internal Server Error
+
+
 
 
     delete:
@@ -363,6 +444,18 @@ definitions:
       category: { type: string }
       createdAt: { type: string }
       description: { type: string }
+
+  TransactionExtraInfo:
+    type: object
+    properties:
+      notes: { type: string, description: "Additional notes or comments about the transaction" }
+      tags: 
+        type: array
+        items:
+          type: string
+        description: "Custom tags for better organization"
+      additionalDetails: { type: string, description: "Any other extra information about the transaction" }
+    
 
   Login:
     type: object
